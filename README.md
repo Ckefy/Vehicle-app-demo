@@ -14,6 +14,6 @@ to each driver.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if any source file was changed.
+Run `ng serve --open` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if any source file was changed.
 
-Also, run `json-server --watch db.json` to mock API-requests. It will serve database-server on `http://localhost:4200/`
+Also, run `json-server --watch db.json` to mock API-requests. It will serve database-server on `http://localhost:3000/` and will return json file with mock via API-request on `http://localhost:3000/data`
