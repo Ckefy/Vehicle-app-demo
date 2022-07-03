@@ -1,27 +1,19 @@
 # DriversVehiclesApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.3.
+This project implements list of Drivers with their vehicles, provided via mock. The state of app maintaining with **NgRx** (implementation of Redux pattern in Angular). **Angular material library** used for almost all components in app, for mocking API-requests library `json-server` was used. If the json-server is not available, the hard-coded mock will be used.
+
+## App features
+
+**Basic CRUD operations**:
++ Display an overview in which all the driver data is represented, except for the id.
++ Make it possible to create, edit and delete drivers.
++ Display in the overview the license plate number of the vehicle associated
+to each driver.
++ Allow the change of vehicle associated to each driver.
++ Apply validation to the form.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if any source file was changed.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Also, run `json-server --watch db.json` to mock API-requests. It will serve database-server on `http://localhost:4200/`
