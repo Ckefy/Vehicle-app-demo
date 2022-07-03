@@ -1,0 +1,30 @@
+<ng-container *ngIf="isLoaded$ | async; else loading">
+  <button mat-icon-button
+          (click)="addNewDriver()"
+          class="add-button"
+          matTooltip="Add new driver"
+          matTooltipPosition="right">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <ng-container *ngIf="drivers$ | async as drivers">
+    <ng-container *ngIf="drivers.length; else empty">
+      <app-driver-card-tile *ngFor="let driver of drivers"
+                            [driver]="driver"
+      ></app-driver-card-tile>
+    </ng-container>
+  </ng-container>
+</ng-container>
+
+<ng-template #loading>
+  <div class="loader-wrapper">
+    <h1 class="loading-text">Loading, please wait</h1>
+    <div class="spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #empty>
+  <h1 class="empty-list">No drivers available</h1>
+</ng-template>

@@ -1,0 +1,56 @@
+<mat-card *ngIf="!!driver" class="card">
+  <mat-card-header class="card-header">
+    <button mat-icon-button
+            (click)="editDriver(driver.id)"
+            class="header-button edit-button"
+            matTooltip="Edit the driver"
+            matTooltipPosition="left">
+      <mat-icon class="close-icon">app_registration</mat-icon>
+    </button>
+
+    <button mat-icon-button
+            (click)="deleteDriver(driver.id)"
+            class="header-button close-button"
+            matTooltip="Delete the driver"
+            matTooltipPosition="right">
+      <mat-icon class="close-icon">delete</mat-icon>
+    </button>
+
+    <div mat-card-avatar
+         [class.inactive]="!driver.active"
+         [matTooltip]="driver.active ? 'Active' : 'Inactive'"
+         class="card-status">
+    </div>
+
+    <mat-card-title>{{ driver.name }} {{ driver.surname }}</mat-card-title>
+
+    <mat-card-subtitle
+      [matTooltip]="formatDate(driver.birthDate)"
+      matTooltipPosition="right"
+      class="card-subtitle"
+    >
+      {{ calculateAge(driver.birthDate) }} years
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content *ngIf="vehicle$ | async as vehicle">
+    <div>{{ vehicle.vehicleType }} with {{ vehicle.fuelType | lowercase}} engine</div>
+    <div>
+      License plate number:
+      <span [cdkCopyToClipboard]="vehicle.registrationNumber" (click)="openNotification()" class="plate-number-button">
+        {{ vehicle.registrationNumber }}
+      </span>
+    </div>
+  </mat-card-content>
+
+  <mat-divider inset></mat-divider>
+
+  <mat-card-actions class="card-actions">
+    Click to send email:
+    <button mat-button
+            (click)="onEmailClick(driver.email)"
+            class="email-button"
+    >
+      {{ driver.email }}</button>
+  </mat-card-actions>
+</mat-card>

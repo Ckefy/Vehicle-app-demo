@@ -1,0 +1,90 @@
+<button mat-icon-button
+        routerLink=""
+        class="home-button"
+        matTooltip="Back to main page"
+        matTooltipPosition="right">
+  <mat-icon>home</mat-icon>
+</button>
+
+<ng-container *ngIf="!!driverForm">
+  <form [formGroup]="driverForm" (ngSubmit)="sendForm()" class="card">
+    <h1 *ngIf="editDriverMode; else newDriverTitle">Edit driver's information</h1>
+    <div class="header">
+      <mat-form-field class="input-header input-name">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="driverName">
+        <mat-error *ngIf="driverForm.get('driverName')?.hasError('required')">
+          Please enter a valid name
+        </mat-error>
+        <mat-error *ngIf="driverForm.get('driverName')?.hasError('pattern')">
+          Name can contain only letters
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input-header input-surname">
+        <mat-label>Surname</mat-label>
+        <input matInput formControlName="driverSurname">
+        <mat-error *ngIf="driverForm.get('driverSurname')?.hasError('required')">
+          Please enter a valid surname
+        </mat-error>
+        <mat-error *ngIf="driverForm.get('driverSurname')?.hasError('pattern')">
+          Surname can contain only letters
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="input-email">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="driverEmail">
+      <mat-error>
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+
+    <div class="additional-info">
+      <mat-form-field class="additional-ifo-input input-status">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="driverStatus">
+          <mat-option *ngFor="let status of statuses" [value]="status.value">
+            {{status.viewValue}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          Please choose a status of driver
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="additional-info-input input-birthday">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="driverBirthday">
+
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-error>
+          Please pick a valid birthday date
+        </mat-error>
+
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field *ngIf="allVehicles$ | async as vehicles" class="vehicle-input">
+      <mat-label>Vehicle</mat-label>
+      <mat-select formControlName="driverVehicle">
+        <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle.id">
+          {{vehicle.registrationNumber}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-card-actions class="send-button-wrapper">
+      <button mat-button type="submit">
+        Apply changes
+      </button>
+    </mat-card-actions>
+  </form>
+</ng-container>
+
+<ng-template #newDriverTitle>
+  <h1>Add new driver</h1>
+</ng-template>
